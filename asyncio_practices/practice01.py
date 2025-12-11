@@ -5,6 +5,7 @@ import asyncio
 async def test_async():
 	print('Executing Code')
 
+
 async def square(num: int):
 	return num * num
 
