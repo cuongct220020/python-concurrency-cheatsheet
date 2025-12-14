@@ -1,24 +1,29 @@
-# SuperFastPython.com
 # example of a parallel for loop with the ProcessPoolExecutor class
 import concurrent.futures
+from concurrent.futures import ProcessPoolExecutor
+import time
 
-# execute a task
-def task(value):
-    # add your work here...
-    # return a result, if needed
-    return value
+def fibo(n: int):
+    if n <= 1:
+        return n
 
-# protect the entry point
+    return fibo(n - 1) + fibo(n - 2)
+
+
 if __name__ == '__main__':
-    # create the pool with the default number of workers
-    with concurrent.futures.ProcessPoolExecutor() as exe:
-        # issue some tasks and collect futures
-        futures = [exe.submit(task, i) for i in range(50)]
-        # process results as tasks are completed
-        for future in concurrent.futures.as_completed(futures):
-            print(f'>got {future.result}')
-        # issue one task for each call to the function
-        for result in exe.map(task, range(50)):
-            print(f'>got {result}')
-    # report that all tasks are completed
-    print('Done')
+    arr = [30, 32, 34, 35, 36, 34]
+    start = time.time()
+
+    with ProcessPoolExecutor() as executor:
+        future_to_num = {executor.submit(fibo, val): val for val in arr}
+
+        for future in concurrent.futures.as_completed(future_to_num):
+            original_num = future_to_num[future]
+            try:
+                result = future.result()
+                print(f"Fibo: {original_num} = {result}")
+            except Exception as exc:
+                print(f"Fibo: {original_num} bị lỗi {exc}")
+
+    end = time.time()
+    print(f"Hoan thanh trong: {end - start} seconds")

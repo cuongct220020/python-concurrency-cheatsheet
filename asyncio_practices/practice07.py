@@ -20,9 +20,6 @@ Bài tập thực hành: Hãy viết một chương trình "HTTP Header Inspecto
 bạn hãy đọc và in ra toàn bộ Headers mà server trả về (ví dụ: Server loại gì, ngày giờ, loại nội dung...).
 """
 
-import asyncio
-
-
 async def main():
     host = 'example.com'
     port = 80  # Dùng cổng 80 cho HTTP thường, đỡ phải config SSL

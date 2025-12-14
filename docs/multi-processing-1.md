@@ -212,6 +212,7 @@ event.set() # Đánh thức Process 1
 * **Nguyên nhân:** Buffer của stdout chưa được xả (flush) hoặc nhiều process tranh chấp I/O.
 * **Khắc phục:** Dùng `print(..., flush=True)` hoặc dùng một Queue chuyên dụng để log.
 
+
 3. Lỗi Pickle:
 * **Nguyên nhân:** Cố gắng truyền các đối tượng không thể tuần tự hóa (như lambda function, database connection) qua `args` của Process.
 * **Khắc phục:** Chỉ truyền dữ liệu thuần (list, dict, string), khởi tạo connection bên trong `run()`.
